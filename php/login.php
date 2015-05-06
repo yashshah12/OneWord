@@ -19,7 +19,7 @@ if (isset($_POST['submitlogin'])) {
         echo "Opened database successfully yash \n";
     }
     $sql = <<<EOF
-      SELECT * from oneword.users where UserName = '$username' AND Password = '$password';
+      SELECT * from oneword.users where "UserName" = '$username' AND "Password" = '$password';
 EOF;
 
     $ret = pg_query($db, $sql);
