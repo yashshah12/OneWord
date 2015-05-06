@@ -25,29 +25,36 @@ session_start();
         <div class ="inbox"  >
             <h3>INBOX</h3>
             <?php
-            $servername = "ec2-23-23-81-221.compute-1.amazonaws.com";
-            $username = "aeqorodridmopp";
-            $password = "UdZfcpfn1ViPdEnvoYmug0BAIw";
-            $dbname = "oneword";
+            //DB Credentials
+            $host = "host=ec2-23-23-81-221.compute-1.amazonaws.com";
+            $port = "port=5432";
+            $dbname = "dbname=dfqf1tisgv020h";
+            $credentials = "user=aeqorodridmopp password=UdZfcpfn1ViPdEnvoYmug0BAIw";
 
-// Create connection
-            $conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
+            $db = pg_connect("$host $port $dbname $credentials");
+            if (!$db) {
+                echo "Error : Unable to open database\n yash";
+            } else {
+                echo "Opened database successfully yash \n";
             }
-            $deleteData = "DELETE FROM messages WHERE LastModified < NOW() - INTERVAL '1 day'";
-                    //"DELETE FROM messages WHERE LastModified < NOW() - interval '7 days'";    
-                    //. "TIMESTAMP(DATE_SUB(NOW(), INTERVAL 1 DAY) )";
-            $conn->query($deleteData);
             $temp = $_SESSION['login_user'];
-            $sql = "SELECT * FROM messages where ToID = '$temp'";
-            $result = $conn->query($sql);
+            $sql = <<<EOF
+      SELECT * from oneword.messages where "ToID" = '$temp';
+EOF;
 
-            if ($result->num_rows > 0) {
+            $ret = pg_query($db, $sql);
+            if (!$ret) {
+                echo pg_last_error($db);
+                exit;
+            }
+            //Deleting Data that is 1 day old
+            //$deleteData = "DELETE FROM messages WHERE LastModified < NOW() - INTERVAL '1 day'";
+            //$conn->query($deleteData);
+            $rows = pg_num_rows($ret);
+            if ($rows > 0) {
                 // output data of each row
                 $count = 1;
-                while ($row = $result->fetch_assoc()) {
+                while ($row = pg_fetch_row($ret)) {
                     // echo $row["Message"]. " From: " . $row["FromID"] ."<br>";
 
                     $from = $row["FromID"];
@@ -77,7 +84,8 @@ session_start();
             } else {
                 echo "0 results";
             }
-            $conn->close();
+//            echo "Operation done successfully\n";
+            pg_close($db);
             ?>
         </div>
 

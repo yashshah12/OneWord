@@ -7,6 +7,7 @@ if (isset($_POST['submitlogin'])) {
     // Define $username and $password
     $username = $_POST['username'];
     $password = $_POST['password'];
+    //DB Credentials
     $host = "host=ec2-23-23-81-221.compute-1.amazonaws.com";
     $port = "port=5432";
     $dbname = "dbname=dfqf1tisgv020h";
@@ -30,8 +31,8 @@ EOF;
     $rows = pg_num_rows($ret);
     if ($rows == 1) {
         echo "Login successfully $username\n";
-//        $_SESSION['login_user'] = $username; // Initializing Session
-//        header("location: profile.php"); // Redirecting To Other Page
+        $_SESSION['login_user'] = $username; // Initializing Session
+        header("location: profile.php"); // Redirecting To Other Page
     } else {
         $errorlogin = "Username or Password is invalid";
     }
