@@ -68,7 +68,7 @@ else if (isset($_POST['submitregister'])) {
 
         //Insert Query
         $sql = <<<EOF
-      INSERT INTO oneword.users ("UserName","Pasword") VALUES ('$username','$password');
+      INSERT INTO oneword.users ("UserName","Password") VALUES ('$username','$password');
 EOF;
 
         $ret = pg_query($db, $sql);
