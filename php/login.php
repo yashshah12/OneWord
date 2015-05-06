@@ -8,7 +8,7 @@ if (isset($_POST['submitlogin'])) {
     $password = $_POST['password'];
 // Establishing Connection with Server by passing server_name, user_id and password as a parameter
 
-    $connection = mysqli_connect("ec2-23-23-81-221.compute-1.amazonaws.com", "aeqorodridmopp", "UdZfcpfn1ViPdEnvoYmug0BAIw", "oneword");
+    $connection = mysqli_connect("ec2-23-23-81-221.compute-1.amazonaws.com", "aeqorodridmopp", "UdZfcpfn1ViPdEnvoYmug0BAIw", "dfqf1tisgv020h");
 // Check connection
     if (mysqli_connect_errno()) {
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -51,7 +51,7 @@ else if (isset($_POST['submitregister'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
 // Establishing Connection with Server by passing server_name, user_id and password as a parameter
-        $connection = mysqli_connect("ec2-23-23-81-221.compute-1.amazonaws.com", "aeqorodridmopp", "UdZfcpfn1ViPdEnvoYmug0BAIw", "oneword");
+        $connection = mysqli_connect("ec2-23-23-81-221.compute-1.amazonaws.com", "aeqorodridmopp", "UdZfcpfn1ViPdEnvoYmug0BAIw", "dfqf1tisgv020h");
 // Check connection
         if (!$connection) {
             die("Connection failed: " . mysqli_connect_error());

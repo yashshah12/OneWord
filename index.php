@@ -13,13 +13,14 @@ if (isset($_SESSION['login_user'])) {
 
         <meta charset="UTF-8">
 
-        <title>OneWord-NetbeansVersion</title>
+        <title>OneWord</title>
 
         <link rel="stylesheet" href="css/loginform.css">
 
     </head>
 
     <body> 
+        <h1>ONEWORD - ALL IT TAKES IS ONE WORD</h1>
         <div>
             <div id="login-loguout-box">
                 <div id="options">
