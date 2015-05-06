@@ -37,19 +37,30 @@ session_start();
             } else {
                 echo "Opened database successfully yash \n";
             }
-            $temp = $_SESSION['login_user'];
-            $sql = <<<EOF
-      SELECT * from oneword.messages where "ToID" = '$temp';
-EOF;
 
+            $temp = $_SESSION['login_user'];
+
+            //Deleting Data that is 1 day old
+            $sql = <<<EOF
+      DELETE FROM oneword.messages where "LastModified" < NOW() - INTERVAL '1 day';
+EOF;
             $ret = pg_query($db, $sql);
             if (!$ret) {
                 echo pg_last_error($db);
                 exit;
             }
-            //Deleting Data that is 1 day old
             //$deleteData = "DELETE FROM messages WHERE LastModified < NOW() - INTERVAL '1 day'";
-            //$conn->query($deleteData);
+
+            //VIEW all msgs
+            $sql = <<<EOF
+      SELECT * from oneword.messages where "ToID" = '$temp';
+EOF;
+            $ret = pg_query($db, $sql);
+            if (!$ret) {
+                echo pg_last_error($db);
+                exit;
+            }
+
             $rows = pg_num_rows($ret);
             if ($rows > 0) {
                 // output data of each row

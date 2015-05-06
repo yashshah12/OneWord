@@ -32,29 +32,41 @@ session_start();
         </div>
 
         <?php
-        $servername = "ec2-23-23-81-221.compute-1.amazonaws.com";
-        $username = "aeqorodridmopp";
-        $password = "UdZfcpfn1ViPdEnvoYmug0BAIw";
-        $dbname = "oneword";
+        //DB Credentials
+        $host = "host=ec2-23-23-81-221.compute-1.amazonaws.com";
+        $port = "port=5432";
+        $dbname = "dbname=dfqf1tisgv020h";
+        $credentials = "user=aeqorodridmopp password=UdZfcpfn1ViPdEnvoYmug0BAIw";
 
-        // Create connection
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
+        $db = pg_connect("$host $port $dbname $credentials");
+        if (!$db) {
+            echo "Error : Unable to open database\n yash";
+        } else {
+            echo "Opened database successfully yash \n";
         }
+
         $temp = $_SESSION['login_user'];
-        $sql = "SELECT Username FROM users where username <> '$temp' ";
-        $result = $conn->query($sql);
+
+        $sql = <<<EOF
+      SELECT "UserName" FROM oneword.users where "UserName" <> '$temp';
+EOF;
+        $ret = pg_query($db, $sql);
+        if (!$ret) {
+            echo pg_last_error($db);
+            exit;
+        }
+
+        //$sql = "SELECT Username FROM users where username <> '$temp' ";
         ?>
         <form action="#" method="post">
             <div class="friends">
                 <?php
-                if ($result->num_rows > 0) {
+                $rows = pg_num_rows($ret);
+                if ($rows > 0) {
                     // output data of each row
-                    while ($row = $result->fetch_assoc()) {
+                    while ($row = pg_fetch_row($ret)) {
                         // echo $row["Message"]. " From: " . $row["FromID"] ."<br>";
-                        $from = $row["Username"];
+                        $from = $row[0];
                         ?>
 
                         <div class="div1">
@@ -92,19 +104,23 @@ session_start();
                 foreach ($_POST['check_list'] as $selected) {
                     //Insert Query
                     $temp = $_SESSION['login_user'];
-                    $sql = "INSERT INTO messages (Message,FromID,ToID,LastModified) VALUES ('$message', '$temp','$selected',current_timestamp)";
-                    if (mysqli_query($conn, $sql)) {
-                        //echo "New record created successfully";
-                         ?>
+                    $sql = <<<EOF
+      INSERT INTO oneword.messages ("Message","FromID","ToID","LastModified") VALUES('$message', '$temp','$selected',current_timestamp) ;
+EOF;
+                    $ret = pg_query($db, $sql);
+                    
+                    // $sql = "INSERT INTO messages (Message,FromID,ToID,LastModified) VALUES ('$message', '$temp','$selected',current_timestamp)";
+                    if ($ret) {
+                        echo "New record created successfully";
+                        ?>
                         <script>
-                           $.notify("Sent Successfully");
+                            $.notify("Sent Successfully");
                         </script>
                         <?php
-                    } else {
-                        echo "Error: " . $sql . "<br>" . $connection->error;
+                    } else if (!$ret) {
+                        echo pg_last_error($db);
+                        exit;
                     }
-                    //echo "<h1>" . $selected . "</h1>";
-                   
                 }
             } else {
                 echo "<b>Please Select Atleast One Option.</b>";
@@ -121,6 +137,6 @@ session_start();
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    
+
 <!--    <script src ="../js/newmessage.js"></script>-->
 </html>
