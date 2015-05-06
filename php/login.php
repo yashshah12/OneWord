@@ -27,7 +27,7 @@ EOF;
         echo pg_last_error($db);
         exit;
     }
-    $rows = pg_num_rows($query);
+    $rows = pg_num_rows($sql);
     if ($rows == 1) {
         echo "Login successfully $username\n";
 //        $_SESSION['login_user'] = $username; // Initializing Session
