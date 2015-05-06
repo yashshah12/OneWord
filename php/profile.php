@@ -57,8 +57,8 @@ EOF;
                 while ($row = pg_fetch_row($ret)) {
                     // echo $row["Message"]. " From: " . $row["FromID"] ."<br>";
 
-                    $from = $row["FromID"];
-                    $message = $row["Message"];
+                    $from = $row[1];
+                    $message = $row[0];
                     $count++;
                     ?> 
 
