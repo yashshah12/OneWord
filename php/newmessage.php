@@ -32,9 +32,9 @@ session_start();
         </div>
 
         <?php
-        $servername = "localhost";
-        $username = "root";
-        $password = "yashshah555";
+        $servername = "ec2-23-23-81-221.compute-1.amazonaws.com";
+        $username = "aeqorodridmopp";
+        $password = "UdZfcpfn1ViPdEnvoYmug0BAIw";
         $dbname = "oneword";
 
         // Create connection
@@ -92,7 +92,7 @@ session_start();
                 foreach ($_POST['check_list'] as $selected) {
                     //Insert Query
                     $temp = $_SESSION['login_user'];
-                    $sql = "INSERT INTO messages (Message,FromID,ToID,LastModified) VALUES ('$message', '$temp','$selected',timestamp(current_timestamp))";
+                    $sql = "INSERT INTO messages (Message,FromID,ToID,LastModified) VALUES ('$message', '$temp','$selected',current_timestamp)";
                     if (mysqli_query($conn, $sql)) {
                         //echo "New record created successfully";
                          ?>

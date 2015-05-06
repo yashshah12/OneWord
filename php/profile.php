@@ -3,7 +3,6 @@
 ?>
 <?php
 session_start();
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,9 +25,9 @@ session_start();
         <div class ="inbox"  >
             <h3>INBOX</h3>
             <?php
-            $servername = "localhost";
-            $username = "root";
-            $password = "yashshah555";
+            $servername = "ec2-23-23-81-221.compute-1.amazonaws.com";
+            $username = "aeqorodridmopp";
+            $password = "UdZfcpfn1ViPdEnvoYmug0BAIw";
             $dbname = "oneword";
 
 // Create connection
@@ -37,7 +36,9 @@ session_start();
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
             }
-            $deleteData = "DELETE FROM messages WHERE LastModified < TIMESTAMP(DATE_SUB(NOW(), INTERVAL 1 DAY) )";
+            $deleteData = "DELETE FROM messages WHERE LastModified < NOW() - INTERVAL '1 day'";
+                    //"DELETE FROM messages WHERE LastModified < NOW() - interval '7 days'";    
+                    //. "TIMESTAMP(DATE_SUB(NOW(), INTERVAL 1 DAY) )";
             $conn->query($deleteData);
             $temp = $_SESSION['login_user'];
             $sql = "SELECT * FROM messages where ToID = '$temp'";
