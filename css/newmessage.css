@@ -81,7 +81,7 @@ div.friends{
 
 div.div1{
     /*    padding-top: 50px;*/
-    background: #999; 
+/*    background: #999; */
     float: left; 
     height: 100%; 
     width: 40%; 
@@ -90,7 +90,7 @@ div.div2{
     /*    padding-top: 50px;*/
     float:right;
     width: 60%;
-    background: #666; 
+    /*background: #666;*/ 
     height: 100%; 
 }
 div.clear {
@@ -111,7 +111,7 @@ div.clear {
 }
 #sendmsg {
     height:50px;
-    width:70px;
+    width:90px;
 
 }
 
