@@ -20,7 +20,7 @@ if (isset($_SESSION['login_user'])) {
     </head>
 
     <body>
-        
+
         <div>
             <div id="login-loguout-box">
                 <h1>ALL IT TAKES IS ONE WORD</h1>
@@ -48,5 +48,4 @@ if (isset($_SESSION['login_user'])) {
 
     </body>
     <script src='https://code.jquery.com/jquery-2.1.3.min.js'></script>
-
 </html>

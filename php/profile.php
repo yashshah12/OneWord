@@ -10,7 +10,8 @@ session_start();
 
     <head>
         <title>Home</title>
-        <link href="../css/homepage.css" rel="stylesheet" type="text/css">
+        <!--<link rel="stylesheet" type="text/css" href="../css/homepage.css" >-->
+        <link rel="stylesheet" href="../css/homepage.css">
     </head>
     <body>
 
