@@ -35,7 +35,7 @@ session_start();
             if (!$db) {
                 echo "Error : Unable to open database\n yash";
             } else {
-                echo "Opened database successfully yash \n";
+                //echo "Opened database successfully yash \n";
             }
 
             $temp = $_SESSION['login_user'];
@@ -111,7 +111,8 @@ EOF;
 
 
     </body>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src='https://code.jquery.com/jquery-2.1.3.min.js'></script>
 </html>
