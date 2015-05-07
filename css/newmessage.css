@@ -71,6 +71,7 @@ div.box {
     /*    padding-top: 50px;*/
     height: 100px; 
     width: 100%; 
+    background: #999;
 }
 div.friends{
 
