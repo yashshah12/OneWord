@@ -20,9 +20,10 @@ if (isset($_SESSION['login_user'])) {
     </head>
 
     <body>
-        <h1>ONEWORD - ALL IT TAKES IS ONE WORD</h1>
+        
         <div>
             <div id="login-loguout-box">
+                <h1>ALL IT TAKES IS ONE WORD</h1>
                 <div id="options">
                     <a href="../index.php"  class="button-login" onclick="displayLogIn()" id="toggle-login">Log in</a>
                     <a href="#register" class="button-register" onclick="displayRegister()"  id="toggle-register">Register</a>
